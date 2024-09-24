@@ -3,7 +3,7 @@ pragma solidity ^0.8.19;
 
 interface IPullOracle {
     /// @notice mapping of dataKey to the latest update
-    function latestUpdate(bytes32 dataKey) external pure returns (uint256,uint256);
+    function latestUpdate(bytes32 dataKey) external view returns (uint256,uint256);
 }
 
 contract PushConsumer {

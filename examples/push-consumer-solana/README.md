@@ -1,4 +1,4 @@
-Sample Project for testing Entangle UDF protocol PUSH model on the Solana  
+# Sample Project for testing Entangle UDF protocol PUSH model on the Solana  
 
 This project includes a sample script that interacts with the udf_solana program to retrieve the latest price of "NGL/USD."
 

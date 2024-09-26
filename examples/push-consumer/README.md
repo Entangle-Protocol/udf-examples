@@ -1,4 +1,4 @@
-# Sample Hardhat Project
+# EVM. Sample client for fetching data via PUSH MODEL
 
 This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
 

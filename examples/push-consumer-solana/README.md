@@ -1,4 +1,4 @@
-# Sample client for testing Entangle UDF protocol PUSH model on the Solana  
+# Solana. Sample client for fetching data via PUSH MODEL  
 
 This project includes a sample script that interacts with the udf_solana program to retrieve the latest price of "NGL/USD."
 

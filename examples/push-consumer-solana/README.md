@@ -1,3 +1,5 @@
+Sample Project for testing Entangle UDF protocol PUSH model on the Solana  
+
 This project includes a sample script that interacts with the udf_solana program to retrieve the latest price of "NGL/USD."
 
 First, it fetches the predefined IDL stored on-chain, which is kept in sync with the price consumer program it is derived from.
@@ -47,4 +49,4 @@ It's possible to review the transaction data using the transaction ID provided i
 > Program returned success
 ```
 
-These logs eventually confirm that the Universal Data Feeds protocol's PUSH model is working as expected.
+The logs eventually confirm that the Universal Data Feeds protocol's PUSH model is working as expected.

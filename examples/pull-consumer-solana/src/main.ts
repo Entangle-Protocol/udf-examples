@@ -2,7 +2,6 @@ import { base64 } from "ethers/lib/utils";
 import * as anchor from "@coral-xyz/anchor";
 import { BN, Program, web3 } from "@coral-xyz/anchor";
 import { utf8 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
-
 import solana from '@solana/web3.js';
 
 const UDF_ROOT = utf8.encode("UDF0");
@@ -91,7 +90,7 @@ async function main() {
         const divisor = new BN("1000000000000000000", 10);
         const int = parseFloat(resultNum.div(divisor).toString());
         const reminder = parseFloat(resultNum.mod(divisor).toString(10)) / parseFloat(divisor.toString(10));
-        console.log("Last NGL/USDT price is:", int + reminder);
+        console.log("Last NGL/USD price is:", int + reminder);
     } else {
         console.error("No return data found in the result.");
     }

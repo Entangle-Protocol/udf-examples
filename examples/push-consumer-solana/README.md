@@ -2,7 +2,7 @@
 
 This project includes a sample script that interacts with the udf_solana program to retrieve the latest price of "NGL/USD."
 
-First, it fetches the predefined IDL stored on-chain, which is kept in sync with the price consumer program it is derived from.
+First of all, the script fetches the predefined IDL stored on-chain, which is kept in sync with the [price consumer program]() it is derived from.
 Then it derives an address of the "NGL/USD" data feed to let solana know what data account is due to be fetched when 
 the `udf_solana` is invoked from the `price_consumer`. It constructs and sends a transaction to the solana localnet.
 

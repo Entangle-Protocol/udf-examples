@@ -1,4 +1,4 @@
-# Solana. Sample client for fetching data via PULL MODEL
+# Solana. Sample client for fetching data via the PULL model
 
 This project includes a sample script that interacts with the [udf_solana](https://github.com/Entangle-Protocol/udf-price-oracle-solana/tree/master/programs/udf-solana) program, utilizing a predefined data feed typically obtained from [pricefeed.entangle.fi](https://pricefeed.entangle.fi/).
 

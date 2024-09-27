@@ -1,4 +1,4 @@
-# Solana. Sample client for fetching data via PUSH MODEL  
+# Solana. Sample client for fetching data via the PUSH model  
 
 This project includes a sample script that interacts with the udf_solana program to retrieve the latest price of "NGL/USD."
 

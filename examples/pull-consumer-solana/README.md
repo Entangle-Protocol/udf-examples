@@ -1,13 +1,13 @@
 # Solana. Sample client for fetching data via PULL MODEL
 
-This project includes a sample script that interacts with the [udf_solana](https://github.com/Entangle-Protocol/udf-price-oracle-solana/tree/master/programs/udf-solana) program, utilizing a predefined data feed typically obtained from pricefeed.entangle.fi.
+This project includes a sample script that interacts with the [udf_solana](https://github.com/Entangle-Protocol/udf-price-oracle-solana/tree/master/programs/udf-solana) program, utilizing a predefined data feed typically obtained from [pricefeed.entangle.fi](https://pricefeed.entangle.fi/).
 
 The PULL model is designed for publishing assets not already available through the PUSH model. In this context, a sample client like the one provided here should first fetch the necessary data from [pricefeed.entangle.fi](https://pricefeed.entangle.fi/) and then interact with the price oracle program to verify whether the price feed is signed by certified transmitters. It's important to note that once the price feed is verified, it becomes available on-chain.
 
 Key Steps of the Script:
 
 - Fetching the IDL: The script first retrieves the predefined IDL stored on-chain, which remains synchronized with the udf_solana program from which it is derived.
-- Deriving UDF Config and Protocol Info Account Addresses: The UDF configuration and protocol information account addresses are derived from the UDF program and the Photon CCM program addresses, respectively. These program-derived addresses are included in the accounts section of the Solana transaction to locate the appropriate data feed accounts and the protocol ID. The protocol ID is necessary to identify the correct transmitters for verifying the validity of the feeds through Photon CCM.
+- Deriving UDF Config and Protocol Info Account Addresses: The UDF configuration and protocol information account addresses are derived from the UDF program and the Photon CCM program addresses, respectively. These program-derived addresses are included in the accounts section of the Solana transaction to locate the appropriate data feed accounts and the protocol ID. The protocol ID is necessary to identify the correct transmitters for verifying the validity of the feeds.
 - Determining the Latest Update Address: The latest update address, derived in a similar manner, is used to store the updated data and corresponds to the "NGL/USD" data feed, which is embedded in the code.
 - Preparing and Sending the getLastPrice Transaction: Next, the getLastPrice transaction is prepared and sent to the Solana network. The latest update address is included in the remaining accounts section of the transaction. The publisher, acting as the signer, covers the transaction fees and allocates space for the price feed account if it does not already exist and requires allocation.
 - Validating the Return Data: Finally, the return data is checked to ensure it contains the expected price, confirming that the transaction has been successfully completed. Once validated, the data is ready for on-chain use.

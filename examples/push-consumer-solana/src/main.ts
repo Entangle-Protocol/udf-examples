@@ -15,10 +15,10 @@ const UDF_PROTOCOL_ID = Buffer.from(
 async function main() {
     const provider = anchor.AnchorProvider.env();
     anchor.setProvider(provider)
-    const consumerProgramAddress = new solana.PublicKey('3r5ixGQu8DRmJWgFEjwnDUQ6yasfYFXDsUbqkA6gkRtv')
-    const idl = await anchor.Program.fetchIdl(consumerProgramAddress, provider);
-    const consumerProgram = new Program(idl!, consumerProgramAddress, provider);
-    const udf_program_id = new web3.PublicKey("7HramSnctpbXqZ4SEzqvqteZdMdj3tEB2c9NT7egPQi7");
+    const consumerProgramId = new solana.PublicKey('3r5ixGQu8DRmJWgFEjwnDUQ6yasfYFXDsUbqkA6gkRtv')
+    const consumerProgramIdl = await anchor.Program.fetchIdl(consumerProgramId, provider);
+    const consumerProgram = new Program(consumerProgramIdl!, consumerProgramId, provider);
+    const udfProgramId = new web3.PublicKey("7HramSnctpbXqZ4SEzqvqteZdMdj3tEB2c9NT7egPQi7");
 
     let utf8Encode = new TextEncoder();
     const dataKey = new Uint8Array(32);
@@ -26,17 +26,17 @@ async function main() {
 
     let latestUpdatePda = web3.PublicKey.findProgramAddressSync(
         [UDF_ROOT, utf8.encode("LAST_UPDATE"), UDF_PROTOCOL_ID, dataKey],
-        udf_program_id
+        udfProgramId
     )[0];
 
     let getLastPriceTx = await consumerProgram.methods
         .consumePrice(dataKey)
         .accounts({
             signer: provider.publicKey,
-            priceOracle: udf_program_id,
+            priceOracle: udfProgramId,
             latestUpdate: latestUpdatePda,
         })
-         .rpc();
+        .rpc();
     console.log("Consume tx signature", getLastPriceTx);
 }
 

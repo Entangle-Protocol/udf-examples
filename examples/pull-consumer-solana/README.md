@@ -2,7 +2,7 @@
 
 This project includes a sample script that interacts with the `udf_solana` program to verify the latest price of the given asset e.g. "BTC/USD"
 
-First of all, the script fetches the predefined IDL stored on-chain, which is kept in sync with the [price verifier program](https://github.com/Entangle-Protocol/udf-price-oracle-solana/tree/master/programs/price-consumer) it is derived from.
+First of all, the script fetches the predefined IDL stored on-chain, which is kept in sync with the [price verifier program](https://github.com/Entangle-Protocol/udf-price-oracle-solana/tree/master/programs/price-consumer-pull) it is derived from.
 Then it derives an address of the given asset to let solana know what data account is due to be verified when
 the `udf_solana` is invoked from the `price_consumer`. It constructs and sends a transaction to the solana localnet.
 

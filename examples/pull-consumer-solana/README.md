@@ -1,18 +1,14 @@
 # Solana. Sample client for fetching data via the PULL model
 
-This project includes a sample script that interacts with the [udf_solana](https://github.com/Entangle-Protocol/udf-price-oracle-solana/tree/master/programs/udf-solana) program, utilizing a predefined data feed typically obtained from [pricefeed.entangle.fi](https://pricefeed.entangle.fi/).
+This project includes a sample script that interacts with the `udf_solana` program to verify the latest price of the given asset e.g. "BTC/USD"
 
-The PULL model is designed for publishing assets not already available through the PUSH model. In this context, a sample client like the one provided here should first fetch the necessary data from [pricefeed.entangle.fi](https://pricefeed.entangle.fi/) and then interact with the price oracle program to verify whether the price feed is signed by certified transmitters. It's important to note that once the price feed is verified, it becomes available on-chain.
+First of all, the script fetches the predefined IDL stored on-chain, which is kept in sync with the [price verifier program](https://github.com/Entangle-Protocol/udf-price-oracle-solana/tree/master/programs/price-consumer) it is derived from.
+Then it derives an address of the given asset to let solana know what data account is due to be verified when
+the `udf_solana` is invoked from the `price_consumer`. It constructs and sends a transaction to the solana localnet.
 
-Key Steps of the Script:
-
-- Fetching the IDL: The script first retrieves the predefined IDL stored on-chain, which remains synchronized with the udf_solana program from which it is derived.
-- Deriving UDF Config and Protocol Info Account Addresses: The UDF configuration and protocol information account addresses are derived from the UDF program and the Photon CCM program addresses, respectively. These program-derived addresses are included in the accounts section of the Solana transaction to locate the appropriate data feed accounts and the protocol ID. The protocol ID is necessary to identify the correct transmitters for verifying the validity of the feeds.
-- Determining the Latest Update Address: The latest update address, derived in a similar manner, is used to store the updated data and corresponds to the "NGL/USD" data feed, which is embedded in the code.
-- Preparing and Sending the getLastPrice Transaction: Next, the getLastPrice transaction is prepared and sent to the Solana network. The latest update address is included in the remaining accounts section of the transaction. The publisher, acting as the signer, covers the transaction fees and allocates space for the price feed account if it does not already exist and requires allocation.
-- Validating the Return Data: Finally, the return data is checked to ensure it contains the expected price, confirming that the transaction has been successfully completed. Once validated, the data is ready for on-chain use.
-
-This process ensures the integrity and availability of price data on-chain, following proper verification procedures using the PULL model of the UDF protocol.
+It's important to note that before running the script, the programs must be deployed on the local Solana network,
+and tests should be executed to initialize the state.
+Detailed instructions can be found in the guide at the [udf-price-oracle-solana repository](https://github.com/Entangle-Protocol/udf-price-oracle-solana)
 
 ### Initialize project
 
@@ -31,10 +27,32 @@ Done in 3.62s.
 ### Running the script
 
 ```shell
-ANCHOR_WALLET=owner.json ANCHOR_PROVIDER_URL=http://localhost:8899  yarn ts-node src/main.ts 
-Data feed pda 9RD6d4hnShVGP3DA73DviceLe8JLp53BB3rBZeuFnWKy
-Get last price transaction signature edSQTo1AEnpEuPXYxqS3QtrNzknkpANWsS4Ae93YM4tvgGy4bFLThWBbbgfBBqU2EBei9SmRfKfrmpP3XZsQ1NJ
-Last NGL/USD price is: 0.1298982833830552
+ANCHOR_WALLET=owner.json ANCHOR_PROVIDER_URL=http://localhost:8899  yarn ts-node src/main.ts "BTC/USD"
+publisher: 6BYZbgcD2vfzJuxezN1jKRJZwhLETW95zmQzLKSiP7XK
+price oracle: 7HramSnctpbXqZ4SEzqvqteZdMdj3tEB2c9NT7egPQi7
+config:  2r6evAGjhh5htsfHZP4hMLv6Ppa1KeY9K34Nz3nAMs5u
+protocol info:  3skPHvBJyYRKnJ9MvyD4VJVJRjai3oatCUZEzKzKAzY3
+latest update:  FUxQxtbFZ649zyankGucZ7dY2H5csfHyktnvxn7dzAWB
+Verify price transaction signature 33kTsu1canzpAUtWooooV1XguqW59GrqyRdF5dyeDat1M5adTpD7LUVZvgu2SdiWehi4F7mByJoWc64UJGb7PLJo
+Last  BTC/USD  price is: 66734.13341275767
 ```
 
-The output in this certain case shows the "NGL/USD" data feed is written at the `9RD6d4hnShVGP3DA73DviceLe8JLp53BB3rBZeuFnWKy` address within the transaction `edSQTo1AEnpEuPXYxqS3QtrNzknkpANWsS4Ae93YM4tvgGy4bFLThWBbbgfBBqU2EBei9SmRfKfrmpP3XZsQ1NJ`.
+It's possible to review the transaction data using the transaction ID provided in the script's logs, as shown in the following sample:
+
+```
+> Program logged: "Instruction: ConsumePrice"
+> Program invoked: Unknown Program (7HramSnctpbXqZ4SEzqvqteZdMdj3tEB2c9NT7egPQi7)  
+> Program logged: "Instruction: LastPrice"  
+> Program consumed: 5014 of 192696 compute units  
+> Program return: 7HramSnctpbXqZ4SEzqvqteZdMdj3tEB2c9NT7egPQi7 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAc19zO3642eEkLpmAAAAAA==  
+> Program returned success
+> Program logged: "Price of: NGL/USD is: 129898283383055207 at: 1723502724"
+> Program consumed: 14134 of 200000 compute units
+> Program return: 3r5ixGQu8DRmJWgFEjwnDUQ6yasfYFXDsUbqkA6gkRtv AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAc19zO3642eEkLpmAAAAAA==
+> Program returned success
+```
+
+The output in this certain case shows the "NGL/USD" data feed is written at the `FUxQxtbFZ649zyankGucZ7dY2H5csfHyktnvxn7dzAWB` address within the transaction `33kTsu1canzpAUtWooooV1XguqW59GrqyRdF5dyeDat1M5adTpD7LUVZvgu2SdiWehi4F7mByJoWc64UJGb7PLJo`.
+The logs eventually confirm that the Universal Data Feeds protocol's PULL model is working as expected.
+
+

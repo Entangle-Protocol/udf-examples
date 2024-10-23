@@ -52,7 +52,8 @@ It's possible to review the transaction data using the transaction ID provided i
 > Program returned success
 ```
 
-The output in this certain case shows the "NGL/USD" data feed is written at the `FUxQxtbFZ649zyankGucZ7dY2H5csfHyktnvxn7dzAWB` address within the transaction `33kTsu1canzpAUtWooooV1XguqW59GrqyRdF5dyeDat1M5adTpD7LUVZvgu2SdiWehi4F7mByJoWc64UJGb7PLJo`.
+The output in this certain case shows the "NGL/USD" data feed is written at the `FUxQxtbFZ649zyankGucZ7dY2H5csfHyktnvxn7dzAWB` 
+address within the transaction `33kTsu1canzpAUtWooooV1XguqW59GrqyRdF5dyeDat1M5adTpD7LUVZvgu2SdiWehi4F7mByJoWc64UJGb7PLJo`.
 The logs eventually confirm that the Universal Data Feeds protocol's PULL model is working as expected.
 
 

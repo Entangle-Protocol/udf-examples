@@ -40,15 +40,15 @@ Last  BTC/USD  price is: 66734.13341275767
 It's possible to review the transaction data using the transaction ID provided in the script's logs, as shown in the following sample:
 
 ```
-> Program logged: "Instruction: ConsumePrice"
-> Program invoked: Unknown Program (7HramSnctpbXqZ4SEzqvqteZdMdj3tEB2c9NT7egPQi7)  
-> Program logged: "Instruction: LastPrice"  
-> Program consumed: 5014 of 192696 compute units  
-> Program return: 7HramSnctpbXqZ4SEzqvqteZdMdj3tEB2c9NT7egPQi7 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAc19zO3642eEkLpmAAAAAA==  
-> Program returned success
-> Program logged: "Price of: NGL/USD is: 129898283383055207 at: 1723502724"
-> Program consumed: 14134 of 200000 compute units
-> Program return: 3r5ixGQu8DRmJWgFEjwnDUQ6yasfYFXDsUbqkA6gkRtv AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAc19zO3642eEkLpmAAAAAA==
+> Program logged: "Instruction: VerifyPrice"
+> Program invoked: Unknown Program (7HramSnctpbXqZ4SEzqvqteZdMdj3tEB2c9NT7egPQi7)
+  > Program logged: "Instruction: GetLastPrice"
+  > Program consumed: 274255 of 386315 compute units
+  > Program return: 7HramSnctpbXqZ4SEzqvqteZdMdj3tEB2c9NT7egPQi7 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4hqiSeT5ML0As=
+  > Program returned success
+> Program logged: "Price of: BTC/USD is: 66734133412757664157707 at: 1729694173"
+> Program consumed: 290304 of 399850 compute units
+> Program return: GHzaqPXQUSQ4AD9c7w7dgA3LR4ztZYTDGKqs5E2JZTwJ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4hqiSeT5ML0As=
 > Program returned success
 ```
 

@@ -1,3 +1,4 @@
+
 # Solana. Sample client for fetching data via the PULL model
 
 This project includes a sample script that interacts with the `udf_solana` program to verify the latest price of the given asset e.g. "BTC/USD"
@@ -10,7 +11,7 @@ It's important to note that before running the script, the programs must be depl
 and tests should be executed to initialize the state.
 Detailed instructions can be found in the guide at the [udf-price-oracle-solana repository](https://github.com/Entangle-Protocol/udf-price-oracle-solana)
 
-### Initialize project
+## Initialize project
 
 To make script be able to run the node environment is to be set up. It installs the dependencies are listed in the `package.json`
 
@@ -24,7 +25,7 @@ yarn install v1.22.22
 Done in 3.62s.
 ```
 
-### Running the script
+## Running the script
 
 ```shell
 ANCHOR_WALLET=owner.json ANCHOR_PROVIDER_URL=http://localhost:8899  yarn ts-node src/main.ts "BTC/USD"

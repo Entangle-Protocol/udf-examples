@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {ethers} from 'hardhat'
 import { BytesLike, BigNumberish } from "ethers";
-import { PullConsumer, TypedContractMethod } from "../typechain-types";
 
 interface FeedValue {
   data: string;
@@ -36,10 +35,11 @@ function decodeBase64ToBytes32(base64: string): string {
   return ethers.hexlify(buffer);
 }
 
-function decodeBase64(base64: string): string {
-  const buffer = Buffer.from(base64, 'base64');
-  const value = buffer.readBigUInt64BE(buffer.length - 8);
-  return (value).toString();
+function decodeBase64(base64: string) : string {
+  const buf = Buffer.from(base64, "base64");
+	const bTrimmed = buf.slice(buf.findIndex(b => b != 0))
+  const BigIntNum = BigInt(`0x${bTrimmed.toString("hex")}`)
+	return BigIntNum.toString();
 }
 
 async function fetchData(url: string): Promise<UpdateResponse> {

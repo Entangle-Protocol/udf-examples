@@ -14,6 +14,11 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
+"@entangle-labs/udf-sdk@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@entangle-labs/udf-sdk/-/udf-sdk-1.0.7.tgz#6a1619c2f548324447d8b200dbf254ffadbfc3d6"
+  integrity sha512-8P5LEBzqH/vuzBHeluqRe9PH+698yVmxcsQY1FWWzmfA2NqcxChXc/jGXc9XbygwtmkREGWR218gKnj3sRxl8w==
+
 "@ethereumjs/rlp@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@ethereumjs/rlp/-/rlp-4.0.1.tgz#626fabfd9081baab3d0a3074b0c7ecaf674aaa41"

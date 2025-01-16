@@ -4,15 +4,15 @@ pragma solidity ^0.8.28;
 interface IUDFOracle {
 
     struct LatestUpdate {
-        /// @notice The price for asset from latest update
+        // @notice The price for asset from latest update
         uint256 latestPrice;
-        /// @notice The timestamp of latest update
+        // @notice The timestamp of latest update
         uint256 latestTimestamp;
     }
 
-    /// @notice Accept updates encoded to bytes, verifies the updates and returns update from calldata. Reverts if the update is not in message
-    /// @param updateMsg Encoded message from oracle
-    /// @param dataFeedId Array of data feed ids
+    // @notice Accept updates encoded to bytes, verifies the updates and returns update from calldata. Reverts if the update is not in message
+    // @param updateMsg Encoded message from oracle
+    // @param dataFeedId Array of data feed ids
     function getOraclePriceUpdateFromMsg(
         bytes calldata updateMsg,
         bytes32 dataFeedId

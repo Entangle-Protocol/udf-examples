@@ -7,10 +7,8 @@ const PullConsumerAddress = "0xAf84DEF16E25b6722aE9ADBd29eBf1573b6569e7";
 async function main() {
 
   // Fetch the update data from finalized-data-snap
-  const feedKey = "BTC/USD";
   const sdk = new UdfSdk();
-  const updateData = await sdk.getCallData([feedKey]);
-  // const verifyArgs = await fetchVerifyArgs(asset);
+  const updateData = await sdk.getCallData(["BTC/USD"]);
 
   // Bind PullConsumer contract on the network
   const consumer = await ethers.getContractAt(

@@ -2,7 +2,7 @@ import { ethers } from "hardhat";
 import { UdfSdk } from '@entangle-labs/udf-sdk';
 
 // PullConsumer contract address on ETH Sepolia
-const PullConsumerAddress = "0xAf84DEF16E25b6722aE9ADBd29eBf1573b6569e7";
+const PullConsumerAddress = "0x06fAdf55c689Da5d17472FE604302e595Bd257c0";
 
 async function main() {
 
@@ -18,7 +18,7 @@ async function main() {
 
   // Send verify transaction
   let tx = await consumer.verifyPrice(
-    updateData,
+    updateData
   );
   await tx.wait();
   console.log("sent tx:", tx.hash);

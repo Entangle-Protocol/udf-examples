@@ -17,6 +17,10 @@ interface IUDFOracle {
         bytes calldata updateMsg,
         bytes32 dataFeedId
     ) external payable returns (LatestUpdate memory update);
+
+    // @notice Returns the necessary fee to be attached to getOraclePriceUpdateFromMsg function
+    // @return required fee to verify an update
+    function getUpdateFee(uint256 nUpdates) external view returns (uint256);
 }
 
 contract PullConsumer {
@@ -36,9 +40,17 @@ contract PullConsumer {
     function verifyPrice(
         bytes calldata updateMsg
     ) public {
-        // Verify the update through UDFOracle
-        IUDFOracle.LatestUpdate memory update = oracle.getOraclePriceUpdateFromMsg(updateMsg, BTC_KEY);
 
+        // Calculate required fee
+        uint256 fee = oracle.getUpdateFee(1);
+
+        // Verify the update through UDFOracle
+        IUDFOracle.LatestUpdate memory update = oracle.getOraclePriceUpdateFromMsg{value: fee}(updateMsg, BTC_KEY);
+
+        // Emit event with verified update
         emit PriceVerified(BTC_KEY, update.latestPrice, update.latestTimestamp);
     }
+
+    // @notice deposit native tokens for fee coverage
+    receive() payable external {}
 }
